@@ -2,26 +2,44 @@
 
 set -ouex pipefail
 
-# Copy the contents of system_files/ of the git repo to /
 cp -avf "/ctx/system_files"/. /
 
-### Install packages
+# sudo rpm-ostree kargs --replace="amdgpu.ppfeaturemask=0xFFF7FFFF=amdgpu.ppfeaturemask=0xffffffff" --append="bluetooth.disable_lpm=1"
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
+dnf5 -y remove lutris waydroid
 
-# this installs a package from fedora repos
-dnf5 install -y tmux
+dnf5 -y install \
+    alsa-plugins-a52.x86_64 \
+    fastfetch \
+    fuse-sshfs \
+    i2c-tools \
+    liquidctl \
+    lm_sensors \
+    openrgb-udev-rules \
+    p7zip \
+    p7zip-plugins \
+    stow \
+    unzip \
+    usbutils \
+    zip
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+SCRIPT_DIR="/ctx/scripts"
+"$SCRIPT_DIR/00-amd.sh"
+"$SCRIPT_DIR/01-docker.sh"
+"$SCRIPT_DIR/02-nix.sh"
+"$SCRIPT_DIR/03-vscode.sh"
+"$SCRIPT_DIR/04-terminal.sh"
+"$SCRIPT_DIR/05-niri.sh"
 
-#### Example for enabling a System Unit File
+dnf5 -y install \
+    ark \
+    dolphin \
+    kde-partitionmanager \
+    kio-extras \
+    mpv \
+    qimgv
 
-systemctl enable podman.socket
+"$SCRIPT_DIR/98-bluetooth.sh"
+"$SCRIPT_DIR/99-disable-usb-wake.sh"
+
+firewall-offline-cmd --add-service=samba
