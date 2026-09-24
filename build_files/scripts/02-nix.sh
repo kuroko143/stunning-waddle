@@ -13,11 +13,3 @@ Options=bind
 [Install]
 WantedBy=local-fs.target
 EOF
-
-dnf5 -y install \
-    busybox \
-    nix \
-    nix-daemon \
-    nix-legacy
-
-systemctl enable nix.mount nix-daemon
