@@ -66,9 +66,7 @@ dnf5 -y install --enablerepo=docker-ce-stable,code \
     usbutils \
     zip \
     ark \
-    dolphin \
-    kde-partitionmanager \
-    kio-extras \
+    gparted \
     mpv \
     qimgv
 
