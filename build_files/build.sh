@@ -70,7 +70,11 @@ dnf5 -y install --enablerepo=docker-ce-stable,code \
     kde-partitionmanager \
     kio-extras \
     mpv \
-    qimgv
+    qimgv \
+    sway \
+    grim \
+    slurp \
+    swaylock
 
 "$SCRIPT_DIR/98-bluetooth.sh"
 "$SCRIPT_DIR/99-disable-usb-wake.sh"
@@ -84,8 +88,8 @@ systemctl enable docker.service docker.socket podman.socket
 systemctl enable nix.mount nix-daemon
 systemctl enable lactd
 
-systemctl disable gdm.service
-systemctl mask gdm.service
-systemctl enable greetd.service
+# systemctl disable gdm.service
+# systemctl mask gdm.service
+# systemctl enable greetd.service
 
 firewall-offline-cmd --add-service=samba
