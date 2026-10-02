@@ -17,6 +17,7 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable atim/starship
+dnf5 -y copr enable alebastr/swayr
 
 dnf5 -y install --enablerepo=docker-ce-stable,code \
     containerd.io \
@@ -72,6 +73,7 @@ dnf5 -y install --enablerepo=docker-ce-stable,code \
     mpv \
     qimgv \
     sway \
+    swayr \
     grim \
     slurp \
     swaylock
@@ -83,6 +85,7 @@ dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable avengemedia/danklinux
 dnf5 -y copr disable ilyaz/LACT
 dnf5 -y copr disable atim/starship
+dnf5 -y copr disable alebastr/swayr
 
 systemctl enable docker.service docker.socket podman.socket
 systemctl enable nix.mount nix-daemon
