@@ -17,7 +17,6 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable atim/starship
-dnf5 -y copr enable alebastr/swayr
 
 dnf5 -y install --enablerepo=docker-ce-stable,code \
     containerd.io \
@@ -72,10 +71,6 @@ dnf5 -y install --enablerepo=docker-ce-stable,code \
     kio-extras \
     mpv \
     qimgv \
-    sway \
-    swayr \
-    grim \
-    slurp \
     swaylock
 
 "$SCRIPT_DIR/98-bluetooth.sh"
@@ -85,14 +80,13 @@ dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable avengemedia/danklinux
 dnf5 -y copr disable ilyaz/LACT
 dnf5 -y copr disable atim/starship
-dnf5 -y copr disable alebastr/swayr
 
 systemctl enable docker.service docker.socket podman.socket
 systemctl enable nix.mount nix-daemon
 systemctl enable lactd
 
-# systemctl disable gdm.service
-# systemctl mask gdm.service
-# systemctl enable greetd.service
+systemctl disable gdm.service
+systemctl mask gdm.service
+systemctl enable greetd.service
 
 firewall-offline-cmd --add-service=samba
